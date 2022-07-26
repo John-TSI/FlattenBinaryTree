@@ -6,7 +6,7 @@
 
 void PrintLinkedListTree(TreeNode* root)
 {
-	while(root->right != nullptr)
+	while(root)
 	{
 		std::cout << root->val << ' ';
 		root = root->right;
