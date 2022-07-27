@@ -3,7 +3,7 @@
 
 void Solution::flatten(TreeNode* root)
 {
-    // --- first solution ---
+    // --- first solution, requires O(# nodes) additional space and a call stack ---
 /*     
     static std::vector<TreeNode*> nodes;
     MakePreorderVec(root, nodes);
@@ -16,12 +16,30 @@ void Solution::flatten(TreeNode* root)
     }
  */
 
-    // --- second solution ---
+
+    // --- second solution, requires a call stack  ---
+/*     
     RecursiveFlatten(root);
+ */
+
+
+    // --- third solution, constant space complexity ---
+    TreeNode* curr{root};
+    while(curr)  // terminate once previous loop iteration sets curr->right = nullptr (curr is then tail of the constructed linked list)
+    {
+        if(curr->left)  // if current node has a left subtree
+        {
+            TreeNode* temp{curr->left};  // create pointer to root of curr's left subtree
+            while(temp->right){ temp = temp->right; }  // traverse temp's right subtree to reach the inorder predecessor of curr
+            temp->right = curr->right;  // link temp to the root of curr's right subtree
+            curr->right = curr->left;  // link curr->right to root of its left subtree
+        }
+        curr = curr->right;  // follow the new right link of curr to reach the next curr node
+    }
 }
 
 
-// --- first solution, requires O(# nodes) additional space and a call stack ---
+// --- first solution helper ---
 void Solution::MakePreorderVec(TreeNode* root, std::vector<TreeNode*>& nodes)
 {
     if(!root){ return; }
@@ -31,7 +49,7 @@ void Solution::MakePreorderVec(TreeNode* root, std::vector<TreeNode*>& nodes)
 }
 
 
-// --- second solution, requires a call stack ---
+// --- second solution helper ---
 TreeNode* Solution::RecursiveFlatten(TreeNode* root)
 {
     if(!root){ return nullptr; }
