@@ -34,7 +34,7 @@ void Solution::flatten(TreeNode* root)
             temp->right = curr->right;  // link temp to the root of curr's right subtree
             curr->right = curr->left;  // link curr->right to root of its left subtree
         }
-        curr = curr->right;  // follow the new right link of curr to reach the next curr node
+        curr = curr->right;  // curr->right is root of its left subtree if the above conditional block was executed
     }
 }
 
