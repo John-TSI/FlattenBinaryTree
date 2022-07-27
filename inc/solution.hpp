@@ -10,6 +10,7 @@ class Solution
     public:
         void flatten(TreeNode*);
         void MakePreorderVec(TreeNode*, std::vector<TreeNode*>&);
+        TreeNode* RecursiveFlatten(TreeNode*);
 };
 
 
