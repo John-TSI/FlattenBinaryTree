@@ -21,7 +21,7 @@ void Solution::flatten(TreeNode* root)
 }
 
 
-// --- first solution, requires O(# nodes) additional space ---
+// --- first solution, requires O(# nodes) additional space and a call stack ---
 void Solution::MakePreorderVec(TreeNode* root, std::vector<TreeNode*>& nodes)
 {
     if(!root){ return; }
@@ -31,7 +31,7 @@ void Solution::MakePreorderVec(TreeNode* root, std::vector<TreeNode*>& nodes)
 }
 
 
-// --- second solution, in-place manipulation of the input tree ---
+// --- second solution, requires a call stack ---
 TreeNode* Solution::RecursiveFlatten(TreeNode* root)
 {
     if(!root){ return nullptr; }
